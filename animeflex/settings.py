@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'video',
 ]
+IS_MONOLINGUAL = False
+TRANSLATABLE_MODEL_MODULES = ['video.models']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
