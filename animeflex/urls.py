@@ -8,5 +8,4 @@ urlpatterns = [
     re_path(r'^i18n/', include('django.conf.urls.i18n')),
     re_path(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}),
-
 ]

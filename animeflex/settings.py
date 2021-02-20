@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -79,6 +79,8 @@ WSGI_APPLICATION = 'animeflex.wsgi.application'
 
 DATABASES = {
     'default': {
+        # 'ENGINE':'django.db.backends.sqlite3',
+        # 'NAME':'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'web',
         'USER': 'root',
