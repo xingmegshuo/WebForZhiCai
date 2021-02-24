@@ -49,9 +49,9 @@
                 <form action="/i18n/setlang/" method="post" class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {% csrf_token %}
                     <button class="dropdown-item" type="submit" name="language" value="zh-hans"
-                            class="language_switcher">{% translate "中文" %}</button>
+                            class="language_switcher">{% trans "中文" %}</button>
                     <button class="dropdown-item" type="submit" name="language" value="en"
-                            class="language_switcher">{% translate "英语" %}</button>
+                            class="language_switcher">{% trans "英语" %}</button>
 
                 </form>
             </li>
@@ -71,9 +71,9 @@
         <strong class="text-center">知才教育</strong>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item"><a href="#show">{% translate "展示" %}</a></li>
-        <li class="list-group-item"><a href="#cour">{% translate "课程" %}</a></li>
-        <li class="list-group-item"><a href="#do">{% translate "下载" %}</a></li>
+        <li class="list-group-item"><a href="#show">{% trans "展示" %}</a></li>
+        <li class="list-group-item"><a href="#cour">{% trans "课程" %}</a></li>
+        <li class="list-group-item"><a href="#do">{% trans "下载" %}</a></li>
     </ul>
 </div>
 
