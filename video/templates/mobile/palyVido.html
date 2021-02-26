@@ -23,82 +23,49 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">知才教育</a>
+    {% if not name %}
+        <button class="btn btn-outline-success my-2 my-sm-0" id="show_login"
+                style="margin-left: 30%">{% trans "登录" %}</button>
+    {% else %}
+        <p class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 30%">{{ name }}</p>
+    {% endif %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    {#    <form action="{% url 'set_language' %}" method="post">#}
-    {#        {% csrf_token %}#}
-    {#        <input name="next" type="hidden" value="{{ redirect_to }}"/>#}
-    {#        <select name="language">#}
-    {#            {% for language in LANGUAGES %}#}
-    {#                <option value="{{ language.0 }}"{% if language.0 == LANGUAGE_CODE %} selected="selected"{% endif %}>#}
-    {#                {{ language.1 }} ({{ language.0 }})#}
-    {#            {% endfor %}#}
-    {#        </select>#}
-    {#        <input type="submit" value="Go"/>#}
-    {#    </form>#}
+
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
         <ul class="navbar-nav mr-auto">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                {% trans "语言切换" %}
+            </a>
+            <form action="/i18n/setlang/" method="post" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% csrf_token %}
+                <button class="dropdown-item" type="submit" name="language" value="zh-hans"
+                        class="language_switcher">{% trans "中文" %}</button>
+                <button class="dropdown-item" type="submit" name="language" value="en"
+                        class="language_switcher">{% trans "英语" %}</button>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    {% trans "语言切换" %}
-                </a>
-                <form action="/i18n/setlang/" method="post" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% csrf_token %}
-                    <button class="dropdown-item" type="submit" name="language" value="zh-hans"
-                            class="language_switcher">{% trans "中文" %}</button>
-                    <button class="dropdown-item" type="submit" name="language" value="en"
-                            class="language_switcher">{% trans "英语" %}</button>
-
-                </form>
+            </form>
             </li>
         </ul>
-        {{ name.length }}
-        {% if not name %}
-            <button class="btn btn-outline-success my-2 my-sm-0" id="show_login">{% trans "登录" %}</button>
-        {% else %}
-            <p class="btn btn-outline-success my-2 my-sm-0">{{ name }}</p>
 
-        {% endif %}
     </div>
 </nav>
 <br>
-<div class="card" style="width: 8rem; margin-left: 20px;position:fixed;">
-    <div class="card-header">
-        <strong class="text-center">知才教育</strong>
-    </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><a href="#show">{% trans "展示" %}</a></li>
-        <li class="list-group-item"><a href="#cour">{% trans "课程" %}</a></li>
-        <li class="list-group-item"><a href="#do">{% trans "下载" %}</a></li>
-    </ul>
-</div>
 
 <main role="main" class="container">
-    <div class="row">
-        {% block content %}
-        {% endblock %}
+    <div style="height:400px">
+        <video id="video" style="background-color: rgb(0, 0, 0); width: 100%; height: 100%; display: block;"
+               controls controlslist="nodownload" src="{{ video.video.url }}">
+        </video>
     </div>
-    <h3 style="text-align:center;margin:20px 0;width:100%" id="do">{% trans "下载" %}</h3>
-
-    <div class="row" style="margin-top: 20px">
-        <div style="width:50%;float:left">
-            <p style="text-align:center;font-size: 18px;color:black">{% trans "课程直播软件下载" %}</p>
-            <p style="text-align:center;font-size: 18px;color:blue"><a>{% trans "下载地址" %}</a></p>
-
-        </div>
-        <div style="width:50%;float:right">
-            <p style="text-align:center;font-size:18px;color:black;">{% trans "中文学习训练小游戏下载" %}</p>
-            <p style="text-align:center;font-size: 18px;color:blue"><a href="http://www.4399.com/flash/159380_3.htm">{% trans "下载地址" %}</a></p>
-        </div>
-    </div>
-
 </main>
 <div id="login_block"
-     style="background-color:#ffffff;width:400px;height:384px;opacity:1;z-index:10000;position:fixed;left:40%;top:30%;border-radius:10px;display:none">
+     style="background-color:#ffffff;width:80%;height:60%;opacity:1;z-index:10000;position:fixed;left:10%;top:20%;border-radius:10px;display:none">
     <h3 style="width:85%;padding-left:40%;margin-top:30px;color:#f20d0d;float:left">{% trans "登录" %}</h3>
     <button id="login_none"
             style="width:10%;float:left;margin-top:20px;font-size:24px;text-align:center;color:rgba(28,31,33,.51);border:none;background-color:#ffffff">
@@ -113,14 +80,6 @@
                style="color:white;background-color: #f20d0d;width:80%;margin:20px 10%;padding:14px;border-color: #f20d0d;border-radius: 10px;">
     </form>
 </div>
-<hr style="background-color:black;">
-<div style="height:200px">
-    <div style="width:40%;margin:auto auto;font-size:18px;text-align:left">
-        <p style="width:100%;text-align:center">Copyright ©2019-2020: xxxxxxx有限公司</p>
-        <p style="margin-top:30px;width:100%;text-align:center"><a href="http://beian.miit.gov.cn/ " target="_blank ">蜀ICP备xxxxxxx号
-            xxxxxx公司版权所有</a></p>
-    </div>
-</div>
 
 {#<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"#}
 {#        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"#}
@@ -134,6 +93,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 <script type="application/javascript">
     $("#show_login").click(function () {
@@ -156,13 +116,28 @@
                 $("#mask").css("display", "none")
                 if (data.status == "ok") {
                     $("#show_login").remove()
-                    window.location.href = "/";
-
+                    window.location.reload()
                 } else {
                     alert(data.name)
                 }
             }
         })
     })
+    var a = 0
+    if ($.cookie('name')) {
+        a = 1
+    } else {
+        a = 0
+    }
+    if (a == 0) {
+        setInterval(function () {
+            v = document.getElementById("video")
+            if (v.currentTime > 10) {
+                v.pause();
+                $("#login_block").css("display", "block")
+                $("#mask").css("display", "block")
+            }
+        }, 100)
+    }
 </script>
 </html>
